@@ -158,6 +158,10 @@ bool Vocations::loadFromXml()
 								voc->meleeDamageMultipler = floatVal;
 							}
 
+							if (readXMLFloat(configNode, "magicDamage", floatVal)) {
+								voc->magicDamageMultipler = floatVal;
+							}
+
 							if (readXMLFloat(configNode, "distDamage", floatVal)) {
 								voc->distDamageMultipler = floatVal;
 							}
@@ -243,6 +247,7 @@ Vocation::Vocation()
 	baseSpeed = 220;
 	manaMultiplier = 4.0;
 	meleeDamageMultipler = 1.0;
+	magicDamageMultipler = 1.0;
 	distDamageMultipler = 1.0;
 	defenseMultipler = 1.0;
 	armorMultipler = 1.0;
