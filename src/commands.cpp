@@ -853,11 +853,6 @@ void Commands::serverInfo(Player* player, const std::string& cmd, const std::str
 
 void Commands::buyHouse(Player* player, const std::string& cmd, const std::string& param)
 {
-	if (!player->isPremium()) {
-		player->sendCancelMessage(RET_YOUNEEDPREMIUMACCOUNT);
-		return;
-	}
-
 	Position pos = player->getPosition();
 	pos = getNextPosition(player->direction, pos);
 
