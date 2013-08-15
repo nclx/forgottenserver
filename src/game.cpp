@@ -4107,7 +4107,7 @@ bool Game::playerSaySpell(Player* player, SpeakClasses type, const std::string& 
 	result = g_spells->playerSaySpell(player, type, words);
 
 	if (result == TALKACTION_BREAK) {
-		return internalCreatureSay(player, SPEAK_SAY, words, false);
+		return internalCreatureSay(player, SPEAK_MONSTER_SAY, words, false);
 	} else if (result == TALKACTION_FAILED) {
 		return true;
 	}

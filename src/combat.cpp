@@ -75,8 +75,8 @@ bool Combat::getMinMaxValues(Creature* creature, Creature* target, int32_t& min,
 		} else {
 			switch (formulaType) {
 				case FORMULA_LEVELMAGIC: {
-					max = (int32_t)((player->getLevel() * 2 + player->getMagicLevel() * 3) * 1. * mina + minb);
-					min = (int32_t)((player->getLevel() * 2 + player->getMagicLevel() * 3) * 1. * maxa + maxb);
+					max = (int32_t)(((player->getLevel() * 2 + player->getMagicLevel() * 3) * 1. * mina + minb) * player->getVocation()->magicDamageMultipler);
+					min = (int32_t)(((player->getLevel() * 2 + player->getMagicLevel() * 3) * 1. * maxa + maxb) * player->getVocation()->magicDamageMultipler);
 					return true;
 				}
 
@@ -1059,6 +1059,12 @@ void ValueCallback::getMinMaxValues(Player* player, int32_t& min, int32_t& max, 
 	} else {
 		max = LuaScriptInterface::popNumber(L);
 		min = LuaScriptInterface::popNumber(L);
+
+		if (type == FORMULA_LEVELMAGIC)
+		{
+			min = (int32_t)(min * player->getVocation()->magicDamageMultipler);
+			max = (int32_t)(max * player->getVocation()->magicDamageMultipler);
+		}
 	}
 
 	if ((lua_gettop(L) + parameters /*nParams*/ + 1) != size0) {
